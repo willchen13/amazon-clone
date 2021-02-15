@@ -1,6 +1,8 @@
 import React from 'react';
 import './Header.css';
 import amazonLogo from "./images/amazonLogo.jpg";
+import SearchIcon from '@material-ui/icons/Search';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 function Header() {
     return (
@@ -9,7 +11,7 @@ function Header() {
 
             <div className="header_search">
                 <input type="text" className="header_searchInput"/>
-                <img src="" alt="" className="header_searchLogo"/>
+                <SearchIcon className="header_searchIcon"></SearchIcon>
             </div>
 
             <div className="header_nav">
@@ -26,6 +28,11 @@ function Header() {
                 <div className="header_option">
                     <span className="header_optionLineOne">Your</span>
                     <span className="header_optionLineTwo">Prime</span>
+                </div>
+
+                <div className="header_optionCart">
+                    <ShoppingCartIcon/>
+                    <span className="header_optionLineTwo header_cartCount">0</span>
                 </div>
             </div>
         </div>
