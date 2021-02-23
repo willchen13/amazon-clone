@@ -3,11 +3,14 @@ import './Header.css';
 import amazonLogo from "../images/amazonLogo.jpg";
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import {Link} from 'react-router-dom';
 
 function Header() {
     return (
         <div className="header">
-            <img className="header_logo" alt="amazonLogo" src={amazonLogo}/>
+            <Link to="/">
+                <img className="header_logo" alt="amazonLogo" src={amazonLogo}/>
+            </Link>
 
             <div className="header_search">
                 <input type="text" className="header_searchInput"/>
@@ -31,7 +34,9 @@ function Header() {
                 </div>
 
                 <div className="header_optionCart">
-                    <ShoppingCartIcon/>
+                    <Link to="/checkout">
+                        <ShoppingCartIcon/>
+                    </Link>
                     <span className="header_optionLineTwo header_cartCount">0</span>
                 </div>
             </div>
