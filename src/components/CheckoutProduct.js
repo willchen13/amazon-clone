@@ -11,7 +11,7 @@ function CheckoutProduct({id,image,title,price,rating}) {
                     <small> $ </small> 
                     <strong> {price} </strong>
                  </p>
-                <d className="productCheckout_rating">
+                <d className="checkoutProduct_rating">
                     {Array(rating).fill().map((_,i)=>
                         <p> ⭐️ </p>
                     )}
