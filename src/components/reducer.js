@@ -13,7 +13,7 @@ export const getCartTotal = (cart) => (
 
 const reducer = (state, action) => {
 
-    console.log('action is', action);
+    // console.log('action is', action);
 
     switch(action.type) {
         case "ADD_TO_CART":
