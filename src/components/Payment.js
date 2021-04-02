@@ -6,8 +6,10 @@ import {Link} from 'react-router-dom';
 import {CardElement, useStripe, useElements} from '@stripe/react-stripe-js';
 import CurrencyFormat from 'react-currency-format';
 import {getCartTotal} from './reducer.js'
-import axios from './axios';
+// import axios from './axios.js';
+import axios from 'axios';
 import {useHistory} from 'react-router-dom';
+import {db} from '../firebase.js';
 
 function Payment() {
 
@@ -20,21 +22,23 @@ function Payment() {
     //state
     const [error, setError] = useState(null);
     const [disabled, setDisabled] = useState(true);
-    const [processing, setProcessing] = useState("");
+    const [processing, setProcessing] = useState(false);
     const [succeeded, setSucceeded] = useState(false);
-    const [clientSecret, setClientSecret] = useState('');
+    const [clientSecret, setClientSecret] = useState('null');
 
     useEffect(()=>{
         const getClientSecret = async () => {
             const response = await axios({
                 method: 'post', 
-                url: `/payments/create?total=${getCartTotal(cart)*100}`
+                url: `http://localhost:5001/clone-2fd96/us-central1/api/payments/create?total=${getCartTotal(cart)*100}`
         })
         setClientSecret(response.data.clientSecret);
     }
     getClientSecret();
     } 
     ,[cart]);
+
+    console.log('client secret is', clientSecret);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -45,17 +49,33 @@ function Payment() {
                 card: elements.getElement(CardElement)
             }
         }).then(({paymentIntent})=> {
+
+            db
+            .collection('users')
+            .doc(user?.uid)
+            .collection('orders')
+            .doc(paymentIntent.id)
+            .set({
+                cart: cart,
+                amount: paymentIntent.amount,
+                created: paymentIntent.created,
+            })
+
+
             setProcessing(false);
             setError(null);
             setSucceeded(true);
 
-            history.replace('/');
+            dispatch({
+                type: 'EMPTY_CART'
+            })
+
+            history.replace('orders');
         })
 
     }
 
     const handleChange = e => {
-        e.preventDefault();
         setDisabled(e.empty);
         setError(e.error ? e.error.message : '');
     }

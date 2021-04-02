@@ -2,17 +2,19 @@ import React, {useState} from 'react';
 import './Login.css';
 import {Link, useHistory} from 'react-router-dom';
 import {auth} from '../firebase.js';
+import {useStateValue} from './StateProvider.js';
 
 function Login() {
 
     const history = useHistory();
+    const [{cart}, dispatch] = useStateValue();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const signIn = e => {
         e.preventDefault();
         auth.signInWithEmailAndPassword(email,password)
-        .then(auth => history.push('/'))
+        .then(auth => {cart.length > 0 ? history.push('/checkout') : history.push('/')})
         .catch(error => alert(error))
     }
 

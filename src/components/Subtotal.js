@@ -7,7 +7,16 @@ import {useHistory} from 'react-router-dom';
 
 function Subtotal() {
 
-    const [{cart}, dispatch] = useStateValue();
+    const [{cart, user}, dispatch] = useStateValue();
+
+    const handleSubmit = e => {
+        e.preventDefault();
+        if(user){
+            history.push('/payment')
+        } else {
+            history.push('/login')
+        }
+    }
 
     const history = useHistory();
 
@@ -27,7 +36,7 @@ function Subtotal() {
                 prefix={"$"}
             />
 
-            <button onClick={e => history.push('/payment')}> Proceed to Checkout </button>
+            <button onClick={handleSubmit}> Proceed to Checkout </button>
         </div>
     )
 }
