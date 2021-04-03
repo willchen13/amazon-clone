@@ -70,7 +70,7 @@ function Payment() {
                 type: 'EMPTY_CART'
             })
 
-            history.replace('orders');
+            history.replace('/orders');
         })
 
     }
@@ -125,7 +125,7 @@ function Payment() {
                             thousandSeparator={true}
                             prefix={"$"}
                             />
-                            <button disabled={processing || disabled || succeeded}>
+                            <button disabled={processing || disabled || succeeded || !clientSecret}>
                                 <span>
                                     {processing ? "Processing" : "Buy Now"}
                                 </span>
