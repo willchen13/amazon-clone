@@ -33,9 +33,12 @@ function Orders() {
             <h1>Orders</h1>
 
             <div className="orders_order">
-                {orders?.map(order => 
-                    <Order order={order}/>
-                )}
+                {orders?.map((order, i) => (
+                    <>
+                        <h2> Order#{[i+1]}</h2>
+                        <Order order={order}/>
+                    </>
+                ))}
             </div>
             
         </div>

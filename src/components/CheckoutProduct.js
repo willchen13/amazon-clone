@@ -1,9 +1,10 @@
+import { FlashOnTwoTone } from '@material-ui/icons';
 import React from 'react';
 import './CheckoutProduct.css';
 import {useStateValue} from './StateProvider.js'
 
 
-function CheckoutProduct({id,image,title,price,rating}) {
+function CheckoutProduct({id,image,title,price,rating,hideButton=false}) {
 
     const [{cart},dispatch] = useStateValue();
 
@@ -28,8 +29,7 @@ function CheckoutProduct({id,image,title,price,rating}) {
                         <p key={i}> ⭐️ </p>
                     )}
                 </d>
-
-                <button onClick={removeFromCart}> Remove from Cart </button>
+                {!hideButton && <button onClick={removeFromCart}> Remove from Cart </button>}
 
 
             </div>

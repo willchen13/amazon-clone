@@ -3,6 +3,7 @@ import moment from 'moment';
 import CurrencyFormat from 'react-currency-format';
 import CheckoutProduct from './CheckoutProduct.js';
 import {useStateValue} from './StateProvider.js';
+import './Order.css';
 
 function Order({order}) {
     
@@ -12,7 +13,6 @@ function Order({order}) {
 
     return (
         <div className="order">
-            <h2> Order </h2>
             <p>{moment.unix(order.data.created).format('LLL')}</p>
             <p className="order_id">
                 <small> {order.id} </small>
@@ -25,12 +25,13 @@ function Order({order}) {
                     title={item.title}
                     price={item.price}
                     rating={item.rating}
+                    hideButton={true}
 
                 />
             )}
             <CurrencyFormat
                 renderText={ (value)=> (
-                    <p> Items ordered: ({cart.length}): <strong> {value} </strong> </p>
+                    <h3 className="order_total"> Order Total: ({cart.length}): <strong> {value} </strong> </h3>
                 ) } 
                 decimalScale={2}
                 value={(order.data.amount)/100}
