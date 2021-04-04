@@ -23,7 +23,7 @@ yarn-debug.log*
 yarn-error.log*
 
 #seeding data to firestore
-/src/json_to_store/
+/src/json_to_firestore/
 
 #firebase configuration file
 firebase.js
