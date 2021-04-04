@@ -48,12 +48,12 @@ function Header() {
                     <span className="header_optionLineTwo">Prime</span>
                 </div>
 
-                <div className="header_optionCart">
+                {cart.length > 0 && <div className="header_optionCart">
                     <Link to="/checkout">
                         <ShoppingCartIcon/>
                     </Link>
                     <span className="header_optionLineTwo header_cartCount">{cart?.length}</span>
-                </div>
+                </div>}
             </div>
         </div>
     )
